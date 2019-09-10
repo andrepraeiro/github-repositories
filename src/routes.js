@@ -10,7 +10,7 @@ export default function Reoutes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={main} />
-        <Route path="/repository" component={repository} />
+        <Route path="/repository/:repository" component={repository} />
       </Switch>
     </BrowserRouter>
   );
