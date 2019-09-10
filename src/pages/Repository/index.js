@@ -17,7 +17,6 @@ export default class Repository extends Component {
   };
 
   state = {
-    repoName: '',
     repository: {},
     issues: [],
     loading: true,
@@ -38,7 +37,6 @@ export default class Repository extends Component {
     ]);
 
     this.setState({
-      repoName,
       repository: repository.data,
       issues: issues.data,
       loading: false,
@@ -46,7 +44,7 @@ export default class Repository extends Component {
   }
 
   render() {
-    const { repoName, repository, issues, loading } = this.state;
+    const { repository, issues, loading } = this.state;
     if (loading) {
       return <Loading>Carregando</Loading>;
     }
