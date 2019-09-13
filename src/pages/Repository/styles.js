@@ -98,3 +98,100 @@ export const IssuesList = styled.ul`
     }
   }
 `;
+
+export const IssuesFilter = styled.div`
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  flex: 1;
+  margin-top: 20px;
+
+  .btn {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    border: 2px solid #555;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 4px;
+    flex: 1 1 auto;
+    align-items: flex-start;
+  }
+
+  .btn:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .btn:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .blue {
+    background: #007bffa1;
+  }
+
+  .green {
+    background: #28a745eb;
+  }
+
+  .red {
+    background: #bd2130bf;
+  }
+
+  .selected {
+    border: 1px solid #eee;
+  }
+`;
+
+export const IssuesPages = styled.div`
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  flex: 1;
+  margin-top: 20px;
+
+  .btn {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    color: #007bff;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    flex: 1 1 auto;
+    align-items: flex-start;
+  }
+  .btn:disabled {
+    color: #0000007a;
+    cursor: not-allowed;
+  }
+
+  .btn:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .btn:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+`;

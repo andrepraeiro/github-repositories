@@ -47,8 +47,8 @@ insert_final_newline = true
 
 ### `yarn add styled-components`
 
-###create global styled
+### create global styled
 
 ## yarn add react-icons
 
-##yarn add axios
+## yarn add axios

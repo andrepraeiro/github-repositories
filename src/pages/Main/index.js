@@ -11,6 +11,7 @@ export default class Main extends Component {
     newRepo: '',
     repositories: [],
     loading: false,
+    error: false,
   };
 
   componentDidMount() {
@@ -27,37 +28,57 @@ export default class Main extends Component {
     }
   }
 
+  existsRepository = () => {
+    const { newRepo, repositories } = this.state;
+    return repositories.find(repo => repo.name === newRepo);
+  };
+
   handleSubmit = async e => {
     e.preventDefault();
-    this.setState({ loading: true });
-    const { newRepo, repositories } = this.state;
-    const response = await api.get(`/repos/${newRepo}`);
-    const data = {
-      name: response.data.full_name,
-    };
-    this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',
-      loading: false,
-    });
+    this.setState({ loading: true, error: false });
+
+    try {
+      const { newRepo, repositories } = this.state;
+
+      if (newRepo === '') {
+        throw new Error('Repository is not informed');
+      }
+
+      if (this.existsRepository()) {
+        throw new Error('Duplicated repository');
+      }
+      const response = await api.get(`/repos/${newRepo}`);
+      const data = {
+        name: response.data.full_name,
+      };
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',
+        loading: false,
+      });
+    } catch (error) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   handleInputChange = e => {
-    this.setState({ newRepo: e.target.value });
+    this.setState({ newRepo: e.target.value, error: false });
   };
 
   render() {
-    const { newRepo, loading, repositories } = this.state;
+    const { newRepo, loading, repositories, error } = this.state;
     return (
       <Container>
         <h1>
           <FaGithubAlt />
-          Repositórios
+          Repositories
         </h1>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} error={error}>
           <input
             type="text"
-            placeholder="Adicionar repositório"
+            placeholder="Add repository"
             value={newRepo}
             onChange={this.handleInputChange}
           />
@@ -74,7 +95,7 @@ export default class Main extends Component {
             <li key={repository.name}>
               <span>{repository.name}</span>
               <Link to={`/repository/${encodeURIComponent(repository.name)}`}>
-                Detalhes
+                Details
               </Link>
             </li>
           ))}
